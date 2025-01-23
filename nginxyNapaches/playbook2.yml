@@ -66,16 +66,29 @@
       template:
         src: "files/web.html.j2"
         dest: "/var/www/{{ name_server }}/index.html"
+    - name: Remove listen PlaceHolderIp
+      ansible.builtin.lineinfile:
+        path: /etc/nginx/sites-available/proxy
+        regexp: "^server 127.0.0.1;"
+        state: absent
+      notify: Restart Nginx
     - name: Add ip and ports to proxy
       lineinfile:
         path: /etc/nginx/sites-available/proxy
         insertafter: "^upstream backend_servers {"
         line: "  server {{apache_ip}}:{{http_port}};"
       notify: Reload Nginx
-    - name: Add listen to ports.conf
+    - name: Remove listen Listen 80
       ansible.builtin.lineinfile:
         path: /etc/apache2/ports.conf
-        regexp: "^Listen 80"
+        regexp: "^Listen 80$"
+        state: absent
+      notify: Restart Nginx
+
+    - name: Add listen to ports.conf
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        insertafter: "^# /etc"
         line: "Listen {{ http_port }}"
       notify: Restart Nginx
 

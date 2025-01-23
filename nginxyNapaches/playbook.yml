@@ -64,7 +64,7 @@
             return 301 https://vb;
           }
           upstream backend_servers {
-
+            server 127.0.0.1;
           }
           server {
             listen 443 ssl;
