@@ -13,6 +13,13 @@
   become: yes
   vars_files:
     - vars/vars.yml
+  vars_prompt:
+    - name: domainNames
+      prompt: "Ingrese el nombre del dominio"
+      private: no  # Si es "yes", oculta la entrada (para contraseñas)
+    - name: ftpUser
+      prompt: "Ingresa el nombre del usuario de ftp"
+      private: no 
 
   tasks:
 # SOFTWARE

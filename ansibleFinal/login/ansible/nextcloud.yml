@@ -89,6 +89,13 @@
       shell: >
         htpasswd -p -b /etc/vsftpd/ftpd.passwd {{ftp_user}}
         $(bcrypt-tool hash {{ ftp_pass }})
+    - name: Set ownership
+      file:
+        path: "/var/www/{{ vbDomain }}"
+        state: directory
+        recurse: yes
+        owner: www-data
+        group: www-data
     #Reiniciar
     - name: Habilitar y reiniciar vsftpd
       service:

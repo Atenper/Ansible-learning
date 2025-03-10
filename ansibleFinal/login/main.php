@@ -48,7 +48,7 @@
                 <div id="left-message" class="alert d-none" role="alert"></div>
                 <!-- Párrafo predeterminado -->
                 <p id="left-paragraph" class="text-center text-secondary fs-4">
-                    Autor: Víctor Zamora Lorente
+                    Autor: Víctor Zamora Lorente<br>
                     Modificado por: Andres Tenllado Perez
                 </p>
             </div>
